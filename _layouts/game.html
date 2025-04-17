@@ -1,14 +1,13 @@
 
-
 {% include style.html%}
-<title>root/</title>
+<title>root/page</title>
 <table>
     <tr>
         <th>Name</th>
         <th>Desc</th>
         <th>Link</th>
     </tr>
-    {% for post in site.tags.Main %}
+    {% for post in site.tags.Game %}
     {% include list.html%}
     {% endfor %}
 </table>
