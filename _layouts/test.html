@@ -1,0 +1,13 @@
+
+
+{% include style.html%}
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Desc</th>
+        <th>Link</th>
+    </tr>
+    {% for post in site.posts %}
+    {% include list.html%}
+    {% endfor %}
+</table>

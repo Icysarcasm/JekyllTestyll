@@ -1,0 +1,75 @@
+<canvas id="matrix"></canvas>
+<style>
+    table{
+        border: 3px;
+        background-color: rgb(0, 0, 0);
+        border-color: rgb(0, 255, 4);
+        border-style: solid;
+        font-family: Arial, Helvetica, sans-serif;
+        padding: 10px;
+        border-radius: 10px;
+        width: auto;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    tr{
+        text-align: center;
+    }
+    td, th{
+        border: 3px;
+        border-color: black;
+        border-style: solid;
+        border-radius: 10px;
+        background-color: rgb(64, 255, 0);
+        padding: 10px;
+        margin: 10px;
+        width: 40px;
+    }
+    canvas {
+            display: block;
+            position:absolute;
+            left:0;
+            top:0;
+            
+            background-color: black;
+            z-index: -1;
+        }
+
+</style>
+
+<script>
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight+1;
+
+    const fontSize = 16;
+    const columns = canvas.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(1);
+
+    const draw = () => {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = '#0F0';
+        ctx.font = `${fontSize}px monospace`;
+
+        drops.forEach((y, x) => {
+            const text = String.fromCharCode(0x30A0 + Math.random() * 96);
+            ctx.fillText(text, x * fontSize, y * fontSize);
+
+            if (y * fontSize > canvas.height && Math.random() > 0.975) {
+                drops[x] = 0;
+            }
+            drops[x]++;
+        });
+    };
+
+    setInterval(draw, 50);
+
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
+</script>
